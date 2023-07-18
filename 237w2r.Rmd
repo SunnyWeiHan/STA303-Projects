@@ -1,0 +1,64 @@
+---
+title: "sta237w2 lecture"
+author: "sunny"
+date: "2023-07-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r week 2 questio 1}
+
+acount = 0
+bcount = 0
+abcount = 0
+draw = sample(c(1, 2, 3, 4, 5, 6), size = 1, replace = TRUE)
+
+for(i in 1:10000){
+    draw = sample(c(1, 2, 3, 4, 5, 6), size = 2, replace = TRUE)
+    if(draw[1] == 6){acount = acount +1}
+    
+    if(sum(draw) == 11){bcount = bcount + 1}
+
+    if(draw[1] & sum(draw == 1)){abcount = abcount+1}
+  }
+
+
+prob_acount = acount/10000
+prob_bcount = bcount/10000
+prob_abcount = abcount/10000
+prob_a_bcount = prob_abcount/prob_bcount
+prob_b_acount = prob_abcount/prob_acount
+
+print(prob_acount)
+print(prob_b_acount)
+print(prob_bcount)
+print(prob_a_bcount)
+print(prob_abcount)
+
+
+```
+```{r week 2 question 2 'mad cow' mimicking question}
+count_t = 0
+count_bt = 0
+
+for(i in 1:100000){
+draw1 = sample(c('B','Bc'), size = 1, prob = c(0.02, 0.98))
+
+if (draw1 == 'B'){
+  draw2 = sample(c('T', 'Tc'), size = 1, prob = c(0.7, 0.3))
+}else{
+  draw2 = sample(c("T", 'Tc'), size = 1, prob = c(0.1, 0.9))
+}
+
+if(draw2 =='T'){count_t = count_t+1}
+if (draw1 == 'B' & draw2 == 'T'){
+  count_bt = count_bt +1
+}
+}
+
+count_t/100000
+count_bt/100000
+```
+
